@@ -29,7 +29,6 @@ body {
     position: relative;
 }
 
-/* ===== АНИМИРОВАННЫЙ ФОН: ПЛАВАЮЩИЕ ОРБЫ ===== */
 .orb {
     position: fixed;
     border-radius: 50%;
@@ -67,7 +66,6 @@ body {
     66%      { transform: translate(-40px, 50px) scale(0.9); }
 }
 
-/* ===== СЕТКА-ПАТТЕРН ПОВЕРХ ФОНА ===== */
 body::before {
     content: '';
     position: fixed;
@@ -82,7 +80,6 @@ body::before {
     -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 20%, transparent 80%);
 }
 
-/* ===== ХЕДЕР (ПЛАВАЮЩИЙ) ===== */
 header {
     position: sticky;
     top: 20px;
@@ -179,7 +176,6 @@ nav a.active {
 
 nav a.active::before { opacity: 1; }
 
-/* ===== КОНТЕНТ ===== */
 .content {
     position: relative;
     z-index: 1;
@@ -192,7 +188,6 @@ nav a.active::before { opacity: 1; }
 .section { width: 100%; }
 .section.hidden { display: none; }
 
-/* ===== ЗАГОЛОВОК С АНИМАЦИЕЙ ===== */
 .title-wrap {
     text-align: center;
     margin-bottom: 50px;
@@ -235,7 +230,7 @@ nav a.active::before { opacity: 1; }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== НОВАЯ СЕТКА ===== */
+/* ===== СЕТКА ===== */
 .grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -249,6 +244,8 @@ nav a.active::before { opacity: 1; }
 .card:nth-child(4) { grid-column: span 2; grid-row: span 1; }
 .card:nth-child(5) { grid-column: span 2; grid-row: span 1; }
 .card:nth-child(6) { grid-column: span 2; grid-row: span 1; }
+.card:nth-child(7) { grid-column: span 3; grid-row: span 1; }
+.card:nth-child(8) { grid-column: span 3; grid-row: span 1; }
 
 .card {
     position: relative;
@@ -261,7 +258,7 @@ nav a.active::before { opacity: 1; }
     border: 1px solid #331a1a;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     opacity: 0;
     transform: translateY(40px) scale(0.95);
     transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -351,22 +348,6 @@ nav a.active::before { opacity: 1; }
     font-size: 1rem;
 }
 
-.card:nth-child(1) .logo-svg {
-    position: absolute;
-    bottom: 24px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    margin: 0;
-    opacity: 0.5;
-    transition: opacity 0.4s, transform 0.4s;
-}
-
-.card:nth-child(1):hover .logo-svg {
-    opacity: 1;
-    transform: scale(1.2) rotate(-10deg);
-}
-
 .card-inner {
     display: flex;
     flex-direction: column;
@@ -382,9 +363,13 @@ nav a.active::before { opacity: 1; }
     height: 72px;
     border-radius: 18px;
     object-fit: cover;
+    object-position: center;
     border: 2px solid #442222;
     background: #1a0f0f;
     transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s, border-radius 0.4s;
+    flex-shrink: 0;
+    display: block;
+    aspect-ratio: 1 / 1;
 }
 
 .card:hover .avatar {
@@ -435,20 +420,30 @@ nav a.active::before { opacity: 1; }
     text-transform: uppercase;
 }
 
+/* ===== ЛОГОТИПЫ СЕРВИСОВ — В ПРАВОМ НИЖНЕМ УГЛУ ===== */
 .logo-svg {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
     width: 36px;
     height: 36px;
-    margin-top: auto;
-    transition: transform 0.4s;
+    transition: transform 0.4s, filter 0.4s, opacity 0.4s;
     opacity: 0.85;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    filter: drop-shadow(0 2px 6px rgba(255,106,0,0.25));
+    flex-shrink: 0;
+    display: block;
+    z-index: 1;
 }
 
 .card:hover .logo-svg {
-    transform: scale(1.15) rotate(-8deg);
+    transform: scale(1.2) rotate(-8deg);
     opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255,106,0,0.6));
 }
 
-/* ===== КНОПКА СВЯЗИ ===== */
 .minecraft-btn {
     display: block;
     width: 100%;
@@ -506,7 +501,6 @@ nav a.active::before { opacity: 1; }
     transform: translateY(2px) scale(0.99);
 }
 
-/* ===== БЛОК ВИДЕО ===== */
 .video-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -643,7 +637,6 @@ nav a.active::before { opacity: 1; }
     50% { opacity: 0.6; box-shadow: 0 0 0 10px rgba(255,106,0,0); }
 }
 
-/* ===== ИНФО ===== */
 .info { text-align: center; max-width: 900px; margin: 0 auto; }
 
 .info-avatar-wrap {
@@ -717,7 +710,6 @@ nav a.active::before { opacity: 1; }
 
 .info-text p { margin-bottom: 16px; }
 
-/* ===== МОДАЛКА ===== */
 .modal, .suggest-modal {
     display: none;
     position: fixed;
@@ -964,6 +956,8 @@ nav a.active::before { opacity: 1; }
     .card:nth-child(4) { grid-column: span 2; }
     .card:nth-child(5) { grid-column: span 2; }
     .card:nth-child(6) { grid-column: span 4; grid-row: span 1; }
+    .card:nth-child(7) { grid-column: span 2; }
+    .card:nth-child(8) { grid-column: span 2; }
 }
 
 @media (max-width: 800px) {
@@ -987,6 +981,8 @@ nav a.active::before { opacity: 1; }
     .card:nth-child(4) { grid-column: span 1; }
     .card:nth-child(5) { grid-column: span 1; }
     .card:nth-child(6) { grid-column: span 2; }
+    .card:nth-child(7) { grid-column: span 2; }
+    .card:nth-child(8) { grid-column: span 2; }
     
     .card:nth-child(1) .card-inner {
         flex-direction: column;
@@ -998,7 +994,6 @@ nav a.active::before { opacity: 1; }
         height: 100px;
     }
     .card:nth-child(1) h3 { font-size: 1.5rem; }
-    .card:nth-child(1) .logo-svg { position: static; margin-top: 12px; }
 }
 
 @media (max-width: 500px) {
@@ -1047,6 +1042,7 @@ nav a.active::before { opacity: 1; }
         </div>
 
         <div class="grid">
+            <!-- YouTube -->
             <a href="https://www.youtube.com/@ChaSha_grief" target="_blank" class="card">
                 <div class="card-inner">
                     <img src="https://unavatar.io/youtube/@ChaSha_grief" class="avatar" alt="Avatar" onerror="this.style.background='#222'">
@@ -1055,9 +1051,13 @@ nav a.active::before { opacity: 1; }
                         <p>YouTube</p>
                     </div>
                 </div>
-                <svg class="logo-svg" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z" fill="#FF0000"/><path d="M9.5 15.6V8.4L15.8 12l-6.3 3.6z" fill="#fff"/></svg>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z" fill="#FF0000"/>
+                    <path d="M9.5 15.6V8.4L15.8 12l-6.3 3.6z" fill="#fff"/>
+                </svg>
             </a>
 
+            <!-- Telegram -->
             <a href="https://t.me/chasha_officiall" target="_blank" class="card">
                 <div class="card-inner">
                     <img src="https://unavatar.io/telegram/chasha_officiall" class="avatar" alt="Avatar" onerror="this.style.background='#222'">
@@ -1066,9 +1066,13 @@ nav a.active::before { opacity: 1; }
                         <p>Telegram</p>
                     </div>
                 </div>
-                <svg class="logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#0088cc"/><path d="M17.6 7.2l-2 9.4c-.1.7-.6.9-1.2.6l-3.3-2.4-1.6 1.5c-.2.2-.3.3-.6.3l.2-3.3 6-5.4c.3-.2 0-.3-.4-.1l-7.4 4.7-3.2-1c-.7-.2-.7-.7.1-1l12.5-4.8c.6-.2 1.1.1.9.9z" fill="#fff"/></svg>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="12" fill="#0088cc"/>
+                    <path d="M17.6 7.2l-2 9.4c-.1.7-.6.9-1.2.6l-3.3-2.4-1.6 1.5c-.2.2-.3.3-.6.3l.2-3.3 6-5.4c.3-.2 0-.3-.4-.1l-7.4 4.7-3.2-1c-.7-.2-.7-.7.1-1l12.5-4.8c.6-.2 1.1.1.9.9z" fill="#fff"/>
+                </svg>
             </a>
 
+            <!-- Twitch -->
             <a href="https://www.twitch.tv/ne_chasha" target="_blank" class="card">
                 <div class="card-inner">
                     <img src="https://unavatar.io/twitch/ne_chasha" class="avatar" alt="Avatar" onerror="this.style.background='#222'">
@@ -1077,31 +1081,44 @@ nav a.active::before { opacity: 1; }
                         <p>Twitch</p>
                     </div>
                 </div>
-                <svg class="logo-svg" viewBox="0 0 24 24"><path d="M4 2L2 5v15h5v3l3-3h5l6-6V2H4zm16 13l-3 3h-5l-3 3v-3H5V4h15v11z" fill="#9146FF"/><path d="M11 7h2v6h-2z" fill="#fff"/><path d="M16 7h2v6h-2z" fill="#fff"/></svg>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <path d="M4 2L2 5v15h5v3l3-3h5l6-6V2H4zm16 13l-3 3h-5l-3 3v-3H5V4h15v11z" fill="#9146FF"/>
+                    <path d="M11 7h2v6h-2z" fill="#fff"/>
+                    <path d="M16 7h2v6h-2z" fill="#fff"/>
+                </svg>
             </a>
 
+            <!-- VK -->
             <a href="https://vk.ru/chaynik1098" target="_blank" class="card">
                 <div class="card-inner">
-                    <img src="https://i.ibb.co/WqZVr21/L86vx2xi-VBs-FGIXf-VJt-LLUVw8hm-EBs-Pi-Du2x6fboi-TXS1ct-NPDy-QX8t2-LLUGp-MZFQMWbx-m-D-Ixklu-Nr-Vz-Bl.jpg" class="avatar" alt="Avatar">
+                    <img src="https://i.ibb.co/WqZVr21/L86vx2xi-VBs-FGIXf-VJt-LLUVw8hm-EBs-Pi-Du2x6fboi-TXS1ct-NPDy-QX8t2-LLUGp-MZFQMWbx-m-D-Ixklu-Nr-Vz-Bl.jpg" class="avatar" alt="VK Avatar" onerror="this.style.background='#222'">
                     <div>
                         <h3>Александра<br>Ханахаки</h3>
                         <p>ВКонтакте</p>
                     </div>
                 </div>
-                <svg class="logo-svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0077FF"/><path d="M13.2 17.8c-5.8 0-9.1-4-9.2-10.6h2.9c.1 4.9 2.3 7 4 7.4V7.2h2.7v4.4c1.7-.2 3.5-2.2 4.1-4.4h2.7c-.5 2.7-2.4 4.7-3.8 5.5 1.4.7 3.5 2.5 4.3 5.1h-3c-.6-1.9-2.1-3.4-4.3-3.6v3.6h-.4z" fill="#fff"/></svg>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <rect width="24" height="24" rx="5" fill="#0077FF"/>
+                    <path d="M13.2 17.8c-5.8 0-9.1-4-9.2-10.6h2.9c.1 4.9 2.3 7 4 7.4V7.2h2.7v4.4c1.7-.2 3.5-2.2 4.1-4.4h2.7c-.5 2.7-2.4 4.7-3.8 5.5 1.4.7 3.5 2.5 4.3 5.1h-3c-.6-1.9-2.1-3.4-4.3-3.6v3.6h-.4z" fill="#fff"/>
+                </svg>
             </a>
 
+            <!-- Steam -->
             <a href="https://steamcommunity.com/id/cha_sha/" target="_blank" class="card">
                 <div class="card-inner">
-                    <img src="https://i.ibb.co/tMwgw9tp/c58321b70586370b70ad6ee603504c2b85f6bfa9-full.jpg" class="avatar" alt="Avatar">
+                    <img src="https://i.ibb.co/tMwgw9tp/c58321b70586370b70ad6ee603504c2b85f6bfa9-full.jpg" class="avatar" alt="Steam Avatar" onerror="this.style.background='#222'">
                     <div>
                         <h3>Gay Name</h3>
                         <p>Steam</p>
                     </div>
                 </div>
-                <svg class="logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#171a21"/><path d="M12 2a10 10 0 0 0-9.9 8.6l5.3 2.2a2.8 2.8 0 0 1 1.5-.4h.2l2.4-3.5v-.1a3.7 3.7 0 1 1 3.7 3.7h-.1l-3.4 2.4v.2a2.8 2.8 0 0 1-5.6.4L2 13.8A10 10 0 1 0 12 2zm-3.3 13.3l-1.2-.5a2.1 2.1 0 0 0 3.7-1.3 2.1 2.1 0 0 0-2.1-2.1c-.2 0-.3 0-.5.1l1.2.5a1.5 1.5 0 1 1-1.1 2.8zm8-2.8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0-4.3a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6z" fill="#fff"/></svg>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="12" fill="#171a21"/>
+                    <path d="M12 2a10 10 0 0 0-9.9 8.6l5.3 2.2a2.8 2.8 0 0 1 1.5-.4h.2l2.4-3.5v-.1a3.7 3.7 0 1 1 3.7 3.7h-.1l-3.4 2.4v.2a2.8 2.8 0 0 1-5.6.4L2 13.8A10 10 0 1 0 12 2zm-3.3 13.3l-1.2-.5a2.1 2.1 0 0 0 3.7-1.3 2.1 2.1 0 0 0-2.1-2.1c-.2 0-.3 0-.5.1l1.2.5a1.5 1.5 0 1 1-1.1 2.8zm8-2.8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0-4.3a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6z" fill="#fff"/>
+                </svg>
             </a>
 
+            <!-- Telegram Suggest -->
             <a onclick="openSuggest()" class="card">
                 <div class="card-inner">
                     <div class="avatar-placeholder">AH</div>
@@ -1110,7 +1127,53 @@ nav a.active::before { opacity: 1; }
                         <p>Telegram → Личка</p>
                     </div>
                 </div>
-                <svg class="logo-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#0088cc"/><path d="M17.6 7.2l-2 9.4c-.1.7-.6.9-1.2.6l-3.3-2.4-1.6 1.5c-.2.2-.3.3-.6.3l.2-3.3 6-5.4c.3-.2 0-.3-.4-.1l-7.4 4.7-3.2-1c-.7-.2-.7-.7.1-1l12.5-4.8c.6-.2 1.1.1.9.9z" fill="#fff"/></svg>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="12" fill="#0088cc"/>
+                    <path d="M17.6 7.2l-2 9.4c-.1.7-.6.9-1.2.6l-3.3-2.4-1.6 1.5c-.2.2-.3.3-.6.3l.2-3.3 6-5.4c.3-.2 0-.3-.4-.1l-7.4 4.7-3.2-1c-.7-.2-.7-.7.1-1l12.5-4.8c.6-.2 1.1.1.9.9z" fill="#fff"/>
+                </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/oleksandra_chula/" target="_blank" class="card">
+                <div class="card-inner">
+                    <img src="https://i.ibb.co/DfgCn7Yk/684802764-18004752473869893-545994145687963678-n.jpg" class="avatar" alt="Instagram Avatar" onerror="this.style.background='#222'">
+                    <div>
+                        <h3>oleksandra_chula</h3>
+                        <p>Instagram</p>
+                    </div>
+                </div>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <defs>
+                        <radialGradient id="igGrad" cx="30%" cy="107%" r="150%">
+                            <stop offset="0%" stop-color="#fdf497"/>
+                            <stop offset="5%" stop-color="#fdf497"/>
+                            <stop offset="45%" stop-color="#fd5949"/>
+                            <stop offset="60%" stop-color="#d6249f"/>
+                            <stop offset="90%" stop-color="#285AEB"/>
+                        </radialGradient>
+                    </defs>
+                    <rect x="1" y="1" width="22" height="22" rx="6" fill="url(#igGrad)"/>
+                    <rect x="6.5" y="6.5" width="11" height="11" rx="3.2" fill="none" stroke="#fff" stroke-width="1.8"/>
+                    <circle cx="12" cy="12" r="3" fill="none" stroke="#fff" stroke-width="1.8"/>
+                    <circle cx="16.8" cy="7.2" r="1" fill="#fff"/>
+                </svg>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@_chasha_" target="_blank" class="card">
+                <div class="card-inner">
+                    <img src="https://i.ibb.co/ymcbQcQN/fb76e84964b8b8be80515a7b5ffad5be-tplv-tiktokx-cropcenter-1080-1080.jpg" class="avatar" alt="TikTok Avatar" onerror="this.style.background='#222'">
+                    <div>
+                        <h3>_chasha_</h3>
+                        <p>TikTok</p>
+                    </div>
+                </div>
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="11" fill="#000"/>
+                    <path d="M15.5 5.5c.3 2 1.6 3.4 3.6 3.7v2.4c-1.3.05-2.5-.3-3.6-1v5.4c0 3-2.2 5-4.9 5-2.6 0-4.6-1.9-4.6-4.4 0-2.6 2.1-4.5 4.8-4.4v2.5c-.3-.05-.6-.1-.9-.1-1.2 0-2.1.9-2.1 2.1 0 1.2.9 2 2.1 2 1.2 0 2.1-.8 2.2-2V5.5h3.4z" fill="#fff"/>
+                    <path d="M15.5 5.5c.3 2 1.6 3.4 3.6 3.7v1c-1.5-.1-2.8-.8-3.6-1.9V5.5z" fill="#25F4EE"/>
+                    <path d="M10 15.5c-.3-.05-.6-.1-.9-.1-1.2 0-2.1.9-2.1 2.1 0 .5.2 1 .5 1.3-.5-.4-.8-1-.8-1.7 0-1.2.9-2.1 2.1-2.1.4 0 .8.1 1.2.2v.3z" fill="#FE2C55"/>
+                </svg>
             </a>
         </div>
 
@@ -1214,7 +1277,6 @@ nav a.active::before { opacity: 1; }
 <div id="toast">Ссылка открыта в новом окне или приложении</div>
 
 <script>
-/* ===== ПЕРЕКЛЮЧЕНИЕ СЕКЦИЙ ===== */
 const secLinks = document.getElementById('links');
 const secInfo  = document.getElementById('info');
 const navLinks = document.getElementById('n-links');
@@ -1230,7 +1292,6 @@ function show(id) {
     currentSection = id;
 }
 
-/* ===== ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ===== */
 function revealCards() {
     const cards = document.querySelectorAll('.card');
     cards.forEach((item, i) => {
@@ -1251,7 +1312,6 @@ if (document.readyState === 'loading') {
     revealCards();
 }
 
-/* ===== УНИВЕРСАЛЬНЫЙ FETCH С НЕСКОЛЬКИМИ ПРОКСИ ===== */
 async function fetchWithFallback(url) {
     const proxies = [
         (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
@@ -1274,7 +1334,6 @@ async function fetchWithFallback(url) {
     throw new Error('Все прокси недоступны');
 }
 
-/* ===== YOUTUBE RSS ===== */
 async function loadLatestYouTubeVideo() {
     const container = document.getElementById('youtube-container');
     const metaTitle = document.querySelector('#youtube-meta .video-title');
@@ -1337,7 +1396,6 @@ async function loadLatestYouTubeVideo() {
     }
 }
 
-/* ===== TWITCH ===== */
 async function loadTwitchStream() {
     const container = document.getElementById('twitch-container');
     const statusEl = document.getElementById('twitch-status');
@@ -1400,7 +1458,6 @@ window.addEventListener('load', () => {
     loadTwitchStream();
 });
 
-/* ===== МОДАЛКИ ===== */
 function openModal()  { document.getElementById('mailModal').classList.add('active'); }
 function closeModal() { document.getElementById('mailModal').classList.remove('active'); }
 document.getElementById('mailModal').addEventListener('click', function(e) {
@@ -1413,7 +1470,6 @@ document.getElementById('suggestModal').addEventListener('click', function(e) {
     if (e.target === this) closeSuggest();
 });
 
-/* ===== КОПИРОВАНИЕ ===== */
 function copyUsername() {
     const username = '@chasha69';
     const toast = document.getElementById('copyToast');
@@ -1450,7 +1506,6 @@ function showCopyToast(toastEl) {
     copyToastTimer = setTimeout(() => toastEl.classList.remove('show'), 2500);
 }
 
-/* ===== ТОСТ ДЛЯ ССЫЛОК ===== */
 const toast = document.getElementById('toast');
 let toastTimer = null;
 function showToast() {
